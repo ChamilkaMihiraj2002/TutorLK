@@ -2,8 +2,7 @@ const mongoose = require('mongoose');
 
 const postSchema = new mongoose.Schema({
   user: {
-    type: mongoose.Schema.Types.ObjectId, // Reference to the User
-    ref: 'User',
+    type: String,
     required: true
   },
   text: {
@@ -11,7 +10,7 @@ const postSchema = new mongoose.Schema({
     required: true
   },
   image: {
-    type: String, // You can store image URL/path here
+    type: String,
     required: false
   },
   createdAt: {
