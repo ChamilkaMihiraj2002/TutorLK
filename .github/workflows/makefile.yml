@@ -13,8 +13,15 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '22' # Adjust to your project's Node.js version
+
     - name: Install dependencies
-      run: make
+      working-directory: Backend
+      run: make install
 
     - name: Run tests
+      working-directory: Backend
       run: make test
