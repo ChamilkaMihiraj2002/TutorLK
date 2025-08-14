@@ -18,7 +18,23 @@ const register = async (req, res) => {
     const user = new User({ username,  email, subjects, Grades, password: hashedPassword });
     await user.save();
 
-    res.status(201).json({ message: 'User registered successfully' });
+    // Auto-login: generate token immediately
+    const token = jwt.sign(
+      { userId: user._id, username: user.username },
+      SECRET_KEY,
+      { expiresIn: '3h' }
+    );
+
+    res.status(201).json({
+      message: 'User registered and logged in successfully',
+      token,
+      user: {
+        id: user._id,
+        username: user.username,
+        email: user.email
+      }
+    });
+    
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
   }
@@ -38,7 +54,7 @@ const login = async (req, res) => {
     const token = jwt.sign(
       { userId: user._id, username: user.username },
       SECRET_KEY,
-      { expiresIn: '1h' }
+      { expiresIn: '3h' }
     );
 
     res.json({
