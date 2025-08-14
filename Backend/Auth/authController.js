@@ -7,7 +7,7 @@ const SECRET_KEY = process.env.JWT_SECRET;
 
 // Register user
 const register = async (req, res) => {
-  const { username, password } = req.body;
+  const { username, password, email, subjects, Grades } = req.body;
 
   try {
     const existingUser = await User.findOne({ username });
@@ -15,10 +15,26 @@ const register = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const user = new User({ username, password: hashedPassword });
+    const user = new User({ username,  email, subjects, Grades, password: hashedPassword });
     await user.save();
 
-    res.status(201).json({ message: 'User registered successfully' });
+    // Auto-login: generate token immediately
+    const token = jwt.sign(
+      { userId: user._id, username: user.username },
+      SECRET_KEY,
+      { expiresIn: '3h' }
+    );
+
+    res.status(201).json({
+      message: 'User registered and logged in successfully',
+      token,
+      user: {
+        id: user._id,
+        username: user.username,
+        email: user.email
+      }
+    });
+    
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
   }
@@ -35,11 +51,24 @@ const login = async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(401).json({ error: 'Invalid credentials' });
 
-    const token = jwt.sign({ userId: user._id, username: user.username }, SECRET_KEY, { expiresIn: '1h' });
-    res.json({ token });
+    const token = jwt.sign(
+      { userId: user._id, username: user.username },
+      SECRET_KEY,
+      { expiresIn: '3h' }
+    );
+
+    res.json({
+      token,
+      user: {
+        id: user._id,
+        username: user.username,
+        email: user.email
+      }
+    });
   } catch (err) {
     res.status(500).json({ error: 'Server error' });
   }
 };
+
 
 module.exports = { register, login };
