@@ -1,3 +1,14 @@
+/*
+
+  * TutorLK - Backend
+  * Description: This is the backend server for TutorLK, a platform for connecting tutors and students.
+  * Author: Chamilka Mihiraj Perera
+  * Date: 8th October 2023
+  * Version: 1.0.0
+  * License: MIT
+  
+*/
+
 require('dotenv').config();
 
 const express = require('express');
@@ -20,7 +31,8 @@ app.use(cors());
 
 const authRoutes = require('./Routes/auth.Routes');
 const userRoutes = require('./Routes/user.Routes');
-const userPosts = require('./Routes/post.Routes');
+const userPosts = require('./Routes/post-public.Routes');
+const postPrivateRoutes = require('./Routes/post-private.Routes');
 
 app.get('/', function (req, res) {
   res.send('Hello World from Express!')
@@ -34,6 +46,7 @@ app.use('/api/users/post',userPosts);
 
 // Protected routes
 app.use('/api/users', authenticateToken ,userRoutes);
+app.use('/api/users/post', authenticateToken ,postPrivateRoutes);
 
 
 mongoose.connect(MONGO_URI,  {
