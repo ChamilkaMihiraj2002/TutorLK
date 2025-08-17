@@ -3,7 +3,7 @@
   * TutorLK - Backend
   * Description: This is the backend server for TutorLK, a platform for connecting tutors and students.
   * Author: Chamilka Mihiraj Perera
-  * Date: 8th October 2023
+  * Date: 8th October 2025
   * Version: 1.0.0
   * License: MIT
   
@@ -39,7 +39,7 @@ app.get('/', function (req, res) {
   res.send('Hello World from Express!')
 })
 
-// API Routes
+// -- API Routes -- //
 
 // Public routes
 app.use('/api/auth', authRoutes);
