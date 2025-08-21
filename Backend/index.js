@@ -33,7 +33,8 @@ const authRoutes = require('./Routes/auth.Routes');
 const userRoutes = require('./Routes/user.Routes');
 const userPosts = require('./Routes/post-public.Routes');
 const postPrivateRoutes = require('./Routes/post-private.Routes');
-const classPublicRoutes = require('./Routes/class-private.Route');
+const classPrivateRoutes = require('./Routes/class-private.Route');
+const classPublicRoutes = require('./Routes/class-public.Route');
 
 app.get('/', function (req, res) {
   res.send('Hello World from Express!')
@@ -43,13 +44,14 @@ app.get('/', function (req, res) {
 
 // Public routes
 app.use('/api/auth', authRoutes);
-app.use('/api/users/post',userPosts);
+app.use('/api/users/post', userPosts);
+app.use('/api/class', classPublicRoutes);
 
 
 // Protected routes
 app.use('/api/users', authenticateToken, userRoutes);
 app.use('/api/users/post', authenticateToken, postPrivateRoutes);
-app.use('/api/class', authenticateToken, classPublicRoutes);
+app.use('/api/class', authenticateToken, classPrivateRoutes);
 
 
 mongoose.connect(MONGO_URI,  {
