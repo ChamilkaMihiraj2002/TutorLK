@@ -47,7 +47,7 @@ exports.getClassesByUser = async (req, res) => {
 
 exports.deleteClassById = async (req, res) => {
     try {
-        const classId = req.params.id;
+        const classId = req.params.classId;
         const deletedClass = await Classes.findByIdAndDelete(classId);
         if (!deletedClass) {
         return res.status(404).json({ message: 'Class not found' });
@@ -60,7 +60,7 @@ exports.deleteClassById = async (req, res) => {
 
 exports.updateClassById = async (req, res) => {
     try {
-        const classId = req.params.id;
+        const classId = req.params.classId;
         const updatedData = req.body;
         const updatedClass = await Classes.findByIdAndUpdate(classId, updatedData, { new: true });
         if (!updatedClass) {
