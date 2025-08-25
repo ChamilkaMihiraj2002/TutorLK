@@ -1,0 +1,4 @@
+.tutor-img {
+  height: 250px;       /* same height for all images */
+  object-fit: cover;   /* crop image nicely */
+}
