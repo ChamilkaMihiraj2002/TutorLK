@@ -2,9 +2,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-const postRoutes = require('./Routes/post-private.Routes'); // adjust path
-const userRoutes = require('./Routes/user.Routes'); // adjust path
-const classRoutes = require('./Routes/classRoutes');
+const postRoutes = require('./Routes/post-private.Routes');
+const userRoutes = require('./Routes/user.Routes'); 
+const classRoutes = require('./Routes/class-private.Route'); 
 
 const app = express();
 
