@@ -1,8 +1,11 @@
-
 const mongoose = require('mongoose');
 const { get } = require('mongoose');
+
+// ======================= USER CONTROLLERS =======================
+
 const User = require('../Models/User.model');
 const Post = require('../Models/Post.model');
+const Class = require('../Models/Class.model');
 
 // Get all users
 const getAllUsers = async (req, res) => {
@@ -43,8 +46,16 @@ const deleteUser = async (req, res) => {
       ]
     });
 
+    // Also delete classes associated with the user
+    const result2 = await Class.deleteMany({
+      $or: [
+        { user: userId }, // in case it's stored as a string
+        { user: new mongoose.Types.ObjectId(userId) } // in case it's stored as ObjectId
+      ]
+    });
+
     res.status(200).json({
-      message: `User deleted successfully, ${result.deletedCount} post(s) removed`
+      message: `User deleted successfully, ${result.deletedCount} post(s) removed, ${result2.deletedCount} class(es) removed`
     });
   } catch (err) {
     console.error(err);

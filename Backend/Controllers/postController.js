@@ -1,6 +1,9 @@
 // controllers/postController.js
 const Post = require('../Models/Post.model');
 
+// ======================= POST CONTROLLERS =======================
+
+
 // Create a new post
 exports.createPost = async (req, res) => {
   try {
@@ -62,6 +65,7 @@ exports.updatePost = async (req, res) => {
 // Delete a post
 exports.deletePost = async (req, res) => {
   try {
+    console.log("Deleting post with ID:", req.params.id);
     const deletedPost = await Post.findByIdAndDelete(req.params.id);
     if (!deletedPost) return res.status(404).json({ message: 'Post not found' });
     res.json({ message: 'Post deleted successfully' });
