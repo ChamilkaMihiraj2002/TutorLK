@@ -4,6 +4,7 @@ const cors = require('cors');
 
 const postRoutes = require('./Routes/post-private.Routes'); // adjust path
 const userRoutes = require('./Routes/user.Routes'); // adjust path
+const classRoutes = require('./Routes/classRoutes');
 
 const app = express();
 
@@ -14,5 +15,6 @@ app.use(bodyParser.json());
 // Routes
 app.use('/posts', postRoutes);
 app.use('/users', userRoutes);
+app.use('/classes', classRoutes);
 
 module.exports = app;
