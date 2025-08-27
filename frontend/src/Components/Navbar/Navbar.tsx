@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import logoImg from "../../assets/Navbar/online-learning.png";
 import { Navbar, Nav, Container, Button, Form } from "react-bootstrap";
-
 import { Link } from "react-router-dom";
+
+import "./Navbar.css";
 
 const AppNavbar: React.FC = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -32,9 +33,9 @@ const AppNavbar: React.FC = () => {
   // Apply dark mode
   useEffect(() => {
     if (darkMode) {
-      document.body.classList.add("bg-dark", "text-white");
+      document.body.classList.add("bg-dark", "text-white", "dark-mode");
     } else {
-      document.body.classList.remove("bg-dark", "text-white");
+      document.body.classList.remove("bg-dark", "text-white", "dark-mode");
     }
     localStorage.setItem("darkMode", String(darkMode));
   }, [darkMode]);
@@ -53,7 +54,7 @@ const AppNavbar: React.FC = () => {
       bg={darkMode ? "dark" : "light"}
       variant={darkMode ? "dark" : "light"}
       expand="lg"
-      className="shadow-sm"
+      className="shadow-sm modern-navbar"
     >
       <Container>
         {/* Logo + Company Name */}
@@ -72,10 +73,18 @@ const AppNavbar: React.FC = () => {
 
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="ms-auto">
-                <Nav.Link as={Link} to="/">Home</Nav.Link>
-                <Nav.Link as={Link} to="/about">About</Nav.Link>
-                <Nav.Link as={Link} to="/services">Services</Nav.Link>
-                <Nav.Link as={Link} to="/contact">Contact Us</Nav.Link>
+            <Nav.Link as={Link} to="/" className="modern-link">
+              Home
+            </Nav.Link>
+            <Nav.Link as={Link} to="/about" className="modern-link">
+              About
+            </Nav.Link>
+            <Nav.Link as={Link} to="/services" className="modern-link">
+              Services
+            </Nav.Link>
+            <Nav.Link as={Link} to="/contact" className="modern-link">
+              Contact Us
+            </Nav.Link>
           </Nav>
 
           {/* Dark Mode Toggle */}
@@ -92,17 +101,30 @@ const AppNavbar: React.FC = () => {
           <div className="ms-lg-3 d-flex gap-2">
             {!isLoggedIn ? (
               <>
-                <Button variant={darkMode ? "outline-light" : "outline-primary"} size="sm">
+                <Button
+                  variant={darkMode ? "outline-light" : "outline-primary"}
+                  size="sm"
+                  className="modern-btn"
+                >
                   Login
                 </Button>
-                <Button variant={darkMode ? "light" : "primary"} size="sm">
+                <Button
+                  variant={darkMode ? "light" : "primary"}
+                  size="sm"
+                  className="modern-btn"
+                >
                   Sign Up
                 </Button>
               </>
             ) : (
               <>
                 <span className="me-2">Hello, {username}</span>
-                <Button variant="danger" size="sm" onClick={handleLogout}>
+                <Button
+                  variant="danger"
+                  size="sm"
+                  onClick={handleLogout}
+                  className="modern-btn"
+                >
                   Logout
                 </Button>
               </>
