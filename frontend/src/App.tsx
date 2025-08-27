@@ -2,6 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import AppNavbar from './Components/Navbar/Navbar'
 import Home from "./Pages/Home page/Home";
+import LoginPage from "./Components/Login/Login";
 
 const About: React.FC = () => <h2 className="m-4">About Page</h2>;
 const Services: React.FC = () => <h2 className="m-4">Services Page</h2>;
@@ -18,10 +19,9 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/services" element={<Services />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUp />} />
       </Routes>
-
     </>
   )
 }
