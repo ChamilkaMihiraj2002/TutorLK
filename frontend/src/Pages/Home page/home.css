@@ -2,3 +2,63 @@
   height: 250px;       /* same height for all images */
   object-fit: cover;   /* crop image nicely */
 }
+
+.home-modern-bg {
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(135deg, #f8fafc 0%, #e0e7ff 100%);
+  min-height: 100vh;
+}
+
+/* Add this for dark mode support */
+body.dark-mode .home-modern-bg {
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+}
+
+.hero-section {
+  background: linear-gradient(120deg, #2563eb 60%, #1e293b 100%);
+  border-radius: 0 0 2rem 2rem;
+  box-shadow: 0 4px 32px rgba(30, 41, 59, 0.15);
+}
+
+.hero-cta {
+  transition: background 0.2s, color 0.2s;
+}
+.hero-cta:hover {
+  background: #2563eb;
+  color: #fff;
+}
+
+.glass-card {
+  background: rgba(255,255,255,0.7);
+  border-radius: 1.5rem;
+  box-shadow: 0 2px 16px rgba(30, 41, 59, 0.08);
+  backdrop-filter: blur(4px);
+}
+
+.modern-carousel .carousel-img {
+  border-radius: 1.5rem;
+  max-height: 350px;
+  object-fit: cover;
+  box-shadow: 0 2px 16px rgba(30, 41, 59, 0.12);
+}
+
+.tutor-card {
+  border-radius: 1.5rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.tutor-card:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 8px 32px rgba(37, 99, 235, 0.15);
+}
+
+.tutor-img-modern {
+  border-radius: 1.5rem 1.5rem 0 0;
+  height: 220px;
+  object-fit: cover;
+}
+
+/* ...existing code... */
+
+body.dark-mode .text-muted {
+  color: #cbd5e1 !important; /* lighter gray for dark backgrounds */
+}
